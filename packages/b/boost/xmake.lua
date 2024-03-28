@@ -41,6 +41,10 @@ package("boost")
         add_syslinks("pthread", "dl")
     end
 
+    if is_plat("mingw") then
+        add_deps("zlib", {system = false})
+    end
+
     add_configs("pyver", {description = "python version x.y, etc. 3.10", default = "3.10"})
 
     add_configs("all",          { description = "Enable all library modules support.",  default = true, type = "boolean"})
