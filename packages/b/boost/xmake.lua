@@ -197,7 +197,7 @@ package("boost")
         if version:ge("1.84.0") then
             import("post184", {rootdir = os.scriptdir()})(modules, package)
         else
-            import("pre184", {rootdir = os.scriptdir()})(modules, package)
+            import("pre184", {rootdir = os.scriptdir()})(libnames, package)
         end
     end)
 
