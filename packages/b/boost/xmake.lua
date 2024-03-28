@@ -106,9 +106,9 @@ package("boost")
         end
 
         if package:is_plat("windows") then
-            local cmake_code = io.readfile("boost/libs/nowide/CMakeLists.txt")
+            local cmake_code = io.readfile("libs/nowide/CMakeLists.txt")
             cmake_code = cmake_code:gsub("def_WERROR ON", "def_WERROR OFF")
-            io.writefile("boost/libs/nowide/CMakeLists.txt", cmake_code)
+            io.writefile("libs/nowide/CMakeLists.txt", cmake_code)
         end
 
         if not package:config("all") then
