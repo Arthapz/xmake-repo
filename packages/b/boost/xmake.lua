@@ -175,7 +175,7 @@ package("boost")
         -- we need the fixed link order
         local sublibs = {log = {"log_setup", "log"},
                          python = {"python", "numpy"},
-                         stacktrace = {"stacktrace_backtrace", "stacktrace_basic"}}
+                         stacktrace = {"stacktrace_backtrace", "stacktrace_basic", "stacktrace_noop", "stacktrace_windbg", "stacktrace_windbg_cached"}}
         for _, libname in ipairs(libnames) do
             local libs = sublibs[libname]
             if libs then
