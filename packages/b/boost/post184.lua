@@ -39,7 +39,7 @@ function main(modules, package)
             elseif package:is_arch("riscv64") then
                 arch = "riscv64"
             end
-            table.insert(configs, "-DBOOST_CONTEXT_ARCHITECTURE=" .. arch})
+            table.insert(configs, "-DBOOST_CONTEXT_ARCHITECTURE=" .. arch)
         end
     end
 
