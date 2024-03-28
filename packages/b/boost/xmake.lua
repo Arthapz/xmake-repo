@@ -145,7 +145,7 @@ package("boost")
         end
     end)
 
-    on_install("macosx", "linux", "windows", "bsd", "mingw", "cross", function (package)
+    on_install("macosx", "linux", "windows", "bsd", "mingw", "cross", "ios", function (package)
         local version = package:version()
         if version:ge("1.84.0") then
             local enabled_libraries
