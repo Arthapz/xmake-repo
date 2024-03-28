@@ -192,7 +192,7 @@ package("boost")
 
     end)
 
-    on_install("macosx", "linux", "windows", "bsd", "mingw", "cross", "ios", function (package)
+    on_install("macosx", "linux", "windows", "bsd", "mingw", "cross", "iphoneos", function (package)
         local version = package:version()
         if version:ge("1.84.0") then
             import("post184", {rootdir = os.scriptdir()})(modules, package)
