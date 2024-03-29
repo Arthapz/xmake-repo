@@ -200,7 +200,12 @@ package("boost")
         import("post184", {rootdir = os.scriptdir()})(modules, package)
     end)
 
-    on_install("macosx", "linux", "windows", "bsd", "mingw", "cross", "iphoneos", function (package)
+    -- CMakeLists is currently bugger under Mingw
+    on_install("mingw", function (package)
+        import("pre184", {rootdir = os.scriptdir()})(modules, package)
+    end)
+
+    on_install("macosx", "linux", "windows", "bsd", "cross", function (package)
         local version = package:version()
         if version:ge("1.84.0") then
             import("post184", {rootdir = os.scriptdir()})(modules, package)
