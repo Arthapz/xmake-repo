@@ -1,4 +1,11 @@
 function main(modules, package)
+    if package:is_plat("windows") then
+        print(os.iorunv("ls"))
+        local cmake_code = io.readfile("libs/nowide/CMakeLists.txt")
+        cmake_code = cmake_code:gsub("def_WERROR ON", "def_WERROR OFF")
+        io.writefile("libs/nowide/CMakeLists.txt", cmake_code)
+    end
+
     local enabled_libraries = {}
     local configs = { "-DCMAKE_BUILD_TYPE=" .. (package:is_debug() and "Debug" or "Release"),
                       "-DBUILD_SHARED_LIBS=" .. (package:config("shared") and "ON" or "OFF") }

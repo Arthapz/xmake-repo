@@ -109,12 +109,6 @@ package("boost")
             end
         end
 
-        if package:is_plat("windows") then
-            local cmake_code = io.readfile("src/libs/nowide/CMakeLists.txt")
-            cmake_code = cmake_code:gsub("def_WERROR ON", "def_WERROR OFF")
-            io.writefile("libs/nowide/CMakeLists.txt", cmake_code)
-        end
-
         if not package:config("all") then
             local enabled_deps = {}
             function add_boost_deps(lib) 
@@ -176,6 +170,7 @@ package("boost")
             end
             return linkname
         end
+
         -- we need the fixed link order
         local sublibs = {log = {"log_setup", "log"},
                          python = {"python", "numpy"},
@@ -199,7 +194,6 @@ package("boost")
             end
         end
         package:set("kind", "library", {headeronly = headeronly})
-
     end)
 
     on_install("android", "iphoneos", function (package)
