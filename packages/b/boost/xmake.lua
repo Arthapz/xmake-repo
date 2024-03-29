@@ -110,6 +110,7 @@ package("boost")
         end
 
         if package:is_plat("windows") then
+            print(os.iorunv("ls ."))
             local cmake_code = io.readfile("libs/nowide/CMakeLists.txt")
             cmake_code = cmake_code:gsub("def_WERROR ON", "def_WERROR OFF")
             io.writefile("libs/nowide/CMakeLists.txt", cmake_code)

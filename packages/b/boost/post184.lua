@@ -19,6 +19,7 @@ function main(modules, package)
             table.insert(configs, "-DBOOST_STACKTRACE_ENABLE_ADDR2LINE=" .. (package:config("stacktrace_enable_addr2line") and "ON" or "OFF"))
             table.insert(configs, "-DBOOST_STACKTRACE_ENABLE_BASIC=" .. (package:config("stacktrace_enable_basic") and "ON" or "OFF"))
         elseif module == "context" and enabled then
+            local arch
             if package:is_arch("aarch64", "arm64+.*") or package:is_plat("iphoneos", "aarch64.*", "arm64.*") then
                 arch = "arm64"
             elseif package:is_arch("arm+.*") or package:is_plat("arm.*") then
@@ -40,7 +41,9 @@ function main(modules, package)
             elseif package:is_arch("riscv64") then
                 arch = "riscv64"
             end
-            table.insert(configs, "-DBOOST_CONTEXT_ARCHITECTURE=" .. arch)
+            if arch then
+                table.insert(configs, "-DBOOST_CONTEXT_ARCHITECTURE=" .. arch)
+            end
         end
     end
 
