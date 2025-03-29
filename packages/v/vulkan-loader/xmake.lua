@@ -76,9 +76,13 @@ package("vulkan-loader")
                     for _, dir in ipairs(fetchinfo.linkdirs) do
                         table.insert(linkdirs, dir)
                     end
+                    for _, dir in ipairs(fetchinfo.bindirs) do
+                        table.insert(linkdirs, dir)
+                    end
                 end
             end
             envs.LD_LIBRARY_PATH = (envs.LD_LIBRARY_PATH or "") .. path.envsep() .. path.joinenv(table.unique(linkdirs))
+            print(opt.envs)
         end
         local configs = {"-DBUILD_TESTS=OFF"}
         local vulkan_headers = package:dep("vulkan-headers")

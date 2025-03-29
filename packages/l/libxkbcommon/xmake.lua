@@ -16,6 +16,7 @@ package("libxkbcommon")
     add_configs("wayland", {description = "Enable backend to X11 (default is true).", default = true, type = "boolean"})
 
     on_load(function (package)
+        package:addenv("LD_LIBRARY_PATH", "lib")
         if package:config("x11") then
             package:add("deps", "libxcb", "xcb-proto", "libxml2")
             if package:is_plat("linux") then
