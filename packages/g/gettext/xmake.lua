@@ -90,6 +90,9 @@ package("gettext")
             end
         end
         if is_subhost("windows") then
+            for _, file in ipairs(os.files("**")) do
+                io.replace(file, [[LIBTOOL='$(SHELL) $(top_builddir)/libtool']], [[LIBTOOL='"$(SHELL)" "$(top_builddir)/libtool"']], {plain = true})
+            end
             for _, file in ipairs(os.files("**.in")) do
                 io.replace(file, [[$(SHELL)]], [["$(SHELL)"]], {plain = true})
             end
