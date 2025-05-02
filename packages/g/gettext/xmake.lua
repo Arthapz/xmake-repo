@@ -95,7 +95,7 @@ package("gettext")
             local git = assert(find_tool("git"), "git tool not found!")
             local git_folder = path.directory(path.directory(git.program))
             local sh = "sh.exe"
-            for _, file in ipairs(os.files(git_folder)) do
+            for _, file in ipairs(os.files(path.join(git_folder, "**"))) do
                 if path.filename(file) == "sh.exe" then
                     sh = file
                 end
