@@ -90,14 +90,22 @@ package("gettext")
             end
         end
         if is_subhost("windows") then
-            for _, file in ipairs(os.files("**")) do
-                io.replace(file, [[LIBTOOL='$(SHELL) $(top_builddir)/libtool']], [[LIBTOOL='"$(SHELL)" "$(top_builddir)/libtool"']], {plain = true})
+            import("package.tools.autoconf")
+            import("lib.detect.find_tool")
+            local git = assert(find_tool("git"), "git tool not found!")
+            local git_folder = path.directory(path.directory(git.program))
+            local sh = "sh.exe"
+            for _, file in ipairs(os.files(path.join(git_folder, "usr", "bin", "**"))) do
+                if path.filename(file) == "sh.exe" then
+                    sh = file
+                end
             end
-            for _, file in ipairs(os.files("**.in")) do
-                io.replace(file, [[$(SHELL)]], [["$(SHELL)"]], {plain = true})
-            end
+            local envs = autoconf.buildenvs(package)
+            envs.PATH = path.directory(sh):replace("Program Files (x86)", "PROGRA~2"):replace("Program Files", "PROGRA~1")
+            autoconf.install(package, configs, {envs = envs, cflags = cflags, ldflags = ldflags})
+        else
+            import("package.tools.autoconf").install(package, configs, {cflags = cflags, ldflags = ldflags})
         end
-        import("package.tools.autoconf").install(package, configs, {cflags = cflags, ldflags = ldflags})
         package:addenv("PATH", "bin")
     end)
 
