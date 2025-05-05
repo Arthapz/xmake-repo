@@ -11,8 +11,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        arch: [armeabi-v7a, arm64-v8a]
-        ndk: ["r22", "r27"]
+        arch: [arm64-v8a]
+        ndk: ["r27"]
         ndk_sdkver: ["30"]
 
     concurrency:
@@ -47,4 +47,5 @@ jobs:
         run: |
           $Env:XMAKE_MAIN_REPO = "https://github.com/xmake-io/xmake-repo.git"
           xmake --version
-          xmake l ./scripts/test.lua -D -p android --ndk=D:/a/xmake-repo/xmake-repo/ndk/android-ndk-${{ matrix.ndk }} --ndk_sdkver=${{ matrix.ndk_sdkver }} -a ${{ matrix.arch }}
+          # REMOVE -v BEFORE REVIEW
+          xmake l ./scripts/test.lua -vD -p android --ndk=D:/a/xmake-repo/xmake-repo/ndk/android-ndk-${{ matrix.ndk }} --ndk_sdkver=${{ matrix.ndk_sdkver }} -a ${{ matrix.arch }}

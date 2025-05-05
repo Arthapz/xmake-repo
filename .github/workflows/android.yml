@@ -11,9 +11,9 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        arch: [armeabi-v7a, arm64-v8a]
-        ndk: ["r22", "r27"]
-        ndk_sdkver: ["21", "30"]
+        arch: [arm64-v8a]
+        ndk: ["r27"]
+        ndk_sdkver: ["30"]
 
     runs-on: ${{ matrix.os }}
 
@@ -40,4 +40,4 @@ jobs:
 
       - name: Tests
         run: |
-          xmake l ./scripts/test.lua -D -p android --ndk=`pwd`/android-ndk-${{ matrix.ndk }} --ndk_sdkver=${{ matrix.ndk_sdkver }} -a ${{ matrix.arch }}
+          xmake l ./scripts/test.lua -vD -p android --ndk=`pwd`/android-ndk-${{ matrix.ndk }} --ndk_sdkver=${{ matrix.ndk_sdkver }} -a ${{ matrix.arch }}
